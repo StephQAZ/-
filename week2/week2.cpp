@@ -8,16 +8,30 @@ using namespace cv;
 using namespace std;
 int main()
 {
-	cv::Mat src_color = imread("C:\\Users\\27318\\Desktop\\大二下网络课程\\数字图像\\week2.png");
-	std::vector<cv::Mat> channels;
-	cv::split(src_color, channels);
-	cv::Mat B = channels.at(0);
-	cv::Mat G = channels.at(1);
-	cv::Mat R = channels.at(2);
-	cv::imshow("red", R);
-	cv::imshow("blue", B);
-	cv::imshow("green", G);
-	cv::imshow("original Mat", src_color);
+	cv::Mat srcMat = imread("C:\\Users\\27318\\Desktop\\大二下网络课程\\数字图像\\week2.png", 0);
+	int height = srcMat.rows;
+	int width = srcMat.cols;
+	int pixels[256];
+	float histgram[256];
+	for (int i = 0; i < 256; i++) {
+		histgram[i] = 0;
+	}
+	for (int j = 0; j < height; j++) {
+		for (int i = 0; i < width; i++) {
+			histgram[srcMat.at<uchar>(j, i)]++;
+		}
+	}
+	cv::Mat dstMat(height, 256, CV_8U, Scalar(255));
+	cv::Point pt[256];
+	cv::Point hengzhou;
+	hengzhou.y = height;
+	for (int i = 0; i < 256; i++) {
+		pt[i].x = i;
+		pt[i].y = height - histgram[i];
+		hengzhou.x = i;
+		line(dstMat, hengzhou, pt[i], CV_RGB(0, 0, 0), 2, 8, 0);
+	}
+	imshow("dstMat", dstMat);
 	waitKey(0);
 }
 
