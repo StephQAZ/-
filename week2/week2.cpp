@@ -7,24 +7,24 @@ using namespace cv;
 using namespace std;
 int main()
 {
-#include <iostream>
-#include <opencv2/opencv.hpp>
-	using namespace cv;
-	using namespace std;
-	int main()
-	{
-		cv::Mat src_color = imread("C:\\Users\\27318\\Desktop\\大二下网络课程\\数字图像\\week2.png");
-		std::vector<cv::Mat> channels;
-		cv::split(src_color, channels);
-		cv::Mat B = channels.at(0);
-		cv::Mat G = channels.at(1);
-		cv::Mat R = channels.at(2);
-		cv::imshow("red", R);
-		cv::imshow("blue", B);
-		cv::imshow("green", G);
-		cv::imshow("original Mat", src_color);
-		waitKey(0);
-	}
+	cv::Mat dispMat=imread("C:\\Users\\27318\\Desktop\\大二下网络课程\\数字图像\\week2.png");
+	cv::Point pt,pt1,pt2;
+	pt.x = 200;
+	pt.y = 200;
+	circle(dispMat, pt, 40, CV_RGB(255, 0, 0), 1, 8, 0);
+	pt1.x = 100;
+	pt1.y = 100;
+	pt2.x = 30;
+	pt2.y = 30;
+	line(dispMat, pt1, pt2, CV_RGB(255, 0, 0), 1, 8, 0);
+	cv::Rect rect;
+	rect.x = 10;
+	rect.y = 10;
+	rect.width;
+	rect.height;
+	rectangle(dispMat, rect, CV_RGB(255, 0, 0), 1, 8, 0);
+	imshow("img", dispMat);
+	waitKey(0);
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
