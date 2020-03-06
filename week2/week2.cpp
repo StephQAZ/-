@@ -21,13 +21,14 @@ int main()
 			histgram[srcMat.at<uchar>(j, i)]++;
 		}
 	}
-	cv::Mat dstMat(height, 256, CV_8U, Scalar(255));
+	cv::Mat dstMat(100, 256, CV_8U, Scalar(255));
 	cv::Point pt[256];
 	cv::Point hengzhou;
 	hengzhou.y = height;
 	for (int i = 0; i < 256; i++) {
+		histgram[i] /= 500;
 		pt[i].x = i;
-		pt[i].y = height - histgram[i];
+		pt[i].y = 100 - histgram[i];
 		hengzhou.x = i;
 		line(dstMat, hengzhou, pt[i], CV_RGB(0, 0, 0), 2, 8, 0);
 	}
