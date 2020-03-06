@@ -7,30 +7,23 @@ using namespace cv;
 using namespace std;
 int main()
 {
-	VideoCapture cap;
-	cap.open(0);
-	if (!cap.isOpened())
+#include <iostream>
+#include <opencv2/opencv.hpp>
+	using namespace cv;
+	using namespace std;
+	int main()
 	{
-		std::cout << "不能打开视频文件" << std::endl;
-		return -1;
-	}
-
-	double fps = cap.get(CAP_PROP_FPS);
-	std::cout << "fps" << fps << std::endl;
-	while (1)
-	{
-		cv::Mat frame;
-		bool rSucess = cap.read(frame);
-		if (!rSucess)
-		{
-			std::cout << "不能从视频文件中读取帧" << std::endl;
-			break;
-		}
-		else
-		{
-			cv::imshow("frame", frame);
-		}
-		waitKey(30);
+		cv::Mat src_color = imread("C:\\Users\\27318\\Desktop\\大二下网络课程\\数字图像\\week2.png");
+		std::vector<cv::Mat> channels;
+		cv::split(src_color, channels);
+		cv::Mat B = channels.at(0);
+		cv::Mat G = channels.at(1);
+		cv::Mat R = channels.at(2);
+		cv::imshow("red", R);
+		cv::imshow("blue", B);
+		cv::imshow("green", G);
+		cv::imshow("original Mat", src_color);
+		waitKey(0);
 	}
 }
 
